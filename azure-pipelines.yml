@@ -1,0 +1,58 @@
+# Maven with SonarCloud analysis
+# Build and run tests for Maven projects
+# and analyse on SonarCloud
+#
+# * If necessary, create an endpoint to connect to SonarCloud
+#
+# * Set the sonarCloudXXX variables below
+# 
+# * Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/en-gb/azure/devops/pipelines/customize-pipeline?view=azure-devops
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Bash@3
+  displayName: 'Use JDK11 by default'
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "##vso[task.setvariable variable=JAVA_HOME]$JAVA_HOME_11_X64"
+
+- task: SonarCloudPrepare@1
+  displayName: 'Prepare analysis configuration'
+  inputs:
+    SonarCloud: 'PartnerHub-SonarCloud'
+    organization: woolworthscorp
+    scannerMode: Other
+
+- task: Maven@3
+  displayName: 'Execute Maven goal'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    options: '-Dmaven.test.failure.ignore=true'
+    mavenOptions: '-Xmx3072m'
+    mavenVersionOption: 'Default'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
+    codeCoverageToolOption: 'JaCoCo'
+    testResultsFiles: '**/TEST-*.xml'
+    goals: 'verify'
+
+#  codeCoverageToolOption: 'Cobertura' 
+# Uncomment the next task to wait until SonarCloud processing has
+# finished and to publish the result on the Pipeline build summary
+- task: SonarCloudPublish@1
+  displayName: 'Publish results on build summary'
+  inputs:
+    pollingTimeoutSec: '300'
