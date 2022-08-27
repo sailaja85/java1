@@ -2,7 +2,7 @@
 # env: flex
 runtime: java 
 env: flex
-service: f1-dot-fservice-project-id
+service: f1service
 resources:
   cpu: 2
   memory_gb: 2.3
