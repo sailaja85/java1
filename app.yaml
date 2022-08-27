@@ -1,6 +1,6 @@
 # This is a comment.
+# env: flex
 runtime: java 
-env: flex
 service: f1-dot-fservice-project-id
 resources:
   cpu: 2
