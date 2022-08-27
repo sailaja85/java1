@@ -24,7 +24,7 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args: ["pull",  "hello-world:latest]
   - name: gcr.io/cloud-builders/docker
-    args: ["push",  "gcr/io/$PROJECT_ID/hello-world:latest]
+    args: ["push",  "gcr/io/$PROJECT_ID/hello-world:latest"]
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args: ['-c', 'gcloud app deploy --image-url gcr.io/$PROJECT_ID/hello-world:latest' ]
