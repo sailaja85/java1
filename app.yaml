@@ -2,15 +2,15 @@
 # env: flex
 runtime: java 
 env: flex
-service: f1service
-resources:
-  cpu: 2
-  memory_gb: 2.3
-  disk_size_gb: 10
-  volumes:
-  - name: ramdisk1
-    volume_type: tmpfs
-    size_gb: 0.5
+service: f1servic
+#resources:
+#  cpu: 2
+#  memory_gb: 2.3
+#  disk_size_gb: 10
+#  volumes:
+#  - name: ramdisk1
+#    volume_type: tmpfs
+#    size_gb: 0.5
 #automatic_scaling:
 #  min_num_instances: 1
 #  max_num_instances: 15
