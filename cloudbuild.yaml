@@ -36,5 +36,5 @@ steps:
 #  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
 #    entrypoint: 'bash'
 #    args: ['-c', 'gcloud app deploy --image-url docker.io/library/hello-world:latest' ]
-images: ["gcr.io/$PROJECT_ID/hellospring"]
+#images: ["gcr.io/$PROJECT_ID/hellospring"]
 # [END cloudbuild_maven]
