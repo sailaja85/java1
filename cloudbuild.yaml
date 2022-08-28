@@ -13,9 +13,16 @@
 # limitations under the License.
 # [START cloudbuild_maven]
 steps:
-#  - name: maven:3-jdk-8
-#    entrypoint: mvn
-#    args: ["test"]
+  - name: maven:3-jdk-8
+    entrypoint: mvn
+    args: ["test"]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+    - |-
+      cp target/cicd-pipeline2-0.0.1-SNAPSHOT.jar .
+      ls
+      gcloud app deploy
 #  - name: maven:3-jdk-8
 #    entrypoint: mvn
 #    args: ["package", "-Dmaven.test.skip=true"]
@@ -25,8 +32,8 @@ steps:
 #    args: ["pull",  "hello-world:latest"]
 #  - name: gcr.io/cloud-builders/docker
 #    args: ['push', 'gcr/io/$PROJECT_ID/hello-world:latest']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args: ['-c', 'gcloud app deploy --image-url docker.io/library/hello-world:latest' ]
+#  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#    entrypoint: 'bash'
+#    args: ['-c', 'gcloud app deploy --image-url docker.io/library/hello-world:latest' ]
 images: ["gcr.io/$PROJECT_ID/hellospring"]
 # [END cloudbuild_maven]
