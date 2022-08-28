@@ -1,6 +1,6 @@
 # This is a comment.
 # env: flex
-runtime: java 
+runtime: java11 
 service: f1servic
 #resources:
 #  cpu: 2
